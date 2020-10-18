@@ -1637,7 +1637,7 @@ static PyMethodDef serviceappMethods[] = {
 PyMODINIT_FUNC
 initserviceapp(void)
 {
-	PyModule_Create("serviceapp", serviceappMethods);
+	PyModule_Create(&serviceappMethods);
 
 	SSL_load_error_strings();
 	SSL_library_init();
