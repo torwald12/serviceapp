@@ -1646,7 +1646,6 @@ static struct PyModuleDef serviceappMethods = {
 	NULL,													/* m_free */
 };
 PyMODINIT_FUNC
-initserviceapp(void)
 {
 	PyModule_Create(&serviceappMethods);
 
