@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+from __future__ import print_function
 import os
 import json
 
@@ -16,7 +18,8 @@ from Tools.BoundFunction import boundFunction
 from enigma import eEnv, eServiceReference
 
 from . import _
-import serviceapp_client
+#import Plugins.SystemPlugins.ServiceApp.serviceapp_client  
+from .serviceapp_client import *
 
 
 SINKS_DEFAULT = ("", "")
@@ -152,8 +155,6 @@ class ServiceAppSettings(ConfigListScreen, Screen):
         Screen.__init__(self, session)
         self.skinName = ["ServiceAppSettings", "Setup"]
         ConfigListScreen.__init__(self, [], session)
-        global playerstartset
-	playerstartset = config_serviceapp.servicemp3.player.value        
         self.setup_title = _("ServiceApp")
         self.onLayoutFinish.append(self.init_configlist)
         self.onClose.append(self.deinit_config)
@@ -264,14 +265,11 @@ class ServiceAppSettings(ConfigListScreen, Screen):
         config_list.append(getConfigListEntry("", ConfigNothing()))
         config_list.append(getConfigListEntry(_("ServiceExtEplayer3 (%s)" % str(serviceapp_client.ID_SERVICEEXTEPLAYER3)), ConfigNothing()))
         config_list += self.player_options("exteplayer3", "serviceexteplayer3")
-        try:
-            self["config"].list = config_list
-            self["config"].l.setList(config_list)
-        except:
-            print "no list" 
+        self["config"].list = config_list
+        self["config"].l.setList(config_list)
 
     def keyOk(self):
-        if config_serviceapp.servicemp3.replace.isChanged() or playerstartset != config_serviceapp.servicemp3.player.value:
+        if config_serviceapp.servicemp3.replace.isChanged():
             self.session.openWithCallback(self.save_settings_and_close, 
                     MessageBox, _("Enigma2 playback system was changed and Enigma2 should be restarted\n\nDo you want to restart it now?"),
                     type=MessageBox.TYPE_YESNO)
@@ -353,28 +351,28 @@ class ServiceAppDetectPlayers(Screen):
         GSTPLAYER_VERSION = None
         jsondata = self._get_first_json_data_from_string(data)
         if jsondata is None:
-            print "[ServiceApp] cannot detect gstplayer version(1)!"
+            print("[ServiceApp] cannot detect gstplayer version(1)!")
             return
         try:
             GSTPLAYER_VERSION = jsondata["GSTPLAYER_EXTENDED"]["version"]
         except KeyError:
-            print "[ServiceApp] cannot detect gstplayer version(2)!"
+            print("[ServiceApp] cannot detect gstplayer version(2)!")
         else:
-            print "[ServiceApp] found gstplayer - %d version" % GSTPLAYER_VERSION
+            print("[ServiceApp] found gstplayer - %d version" % GSTPLAYER_VERSION)
 
     def detect_exteplayer3(self, data, retval, extra_args):
         global EXTEPLAYER3_VERSION
         EXTEPLAYER3_VERSION = None
         jsondata = self._get_first_json_data_from_string(data)
         if jsondata is None:
-            print "[ServiceApp] cannot detect exteplayer3 version(1)!"
+            print("[ServiceApp] cannot detect exteplayer3 version(1)!")
             return
         try:
             EXTEPLAYER3_VERSION = jsondata["EPLAYER3_EXTENDED"]["version"]
         except KeyError:
-            print "[ServiceApp] cannot detect exteplayer3 version(2)!"
+            print("[ServiceApp] cannot detect exteplayer3 version(2)!")
         else:
-            print "[ServiceApp] found exteplayer3 - %d version" % EXTEPLAYER3_VERSION
+            print("[ServiceApp] found exteplayer3 - %d version" % EXTEPLAYER3_VERSION)
 
 
 def main(session, **kwargs):
