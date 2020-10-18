@@ -1634,12 +1634,12 @@ static PyMethodDef serviceappMethods[] = {
 	 {NULL,NULL,0,NULL}
 };
 
-static struct PyModuleDef serviceappMethods = {
+static struct PyModuleDef moduledef = {
 	PyModuleDef_HEAD_INIT,
 	"serviceapp",											/* m_name */
 	"Module that implements serviceapp via unix domain socket.",	/* m_doc */
 	-1,														/* m_size */
-	module_methods,											/* m_methods */
+	serviceappMethods,											/* m_methods */
 	NULL,													/* m_reload */
 	NULL,													/* m_traverse */
 	NULL,													/* m_clear */
@@ -1647,7 +1647,7 @@ static struct PyModuleDef serviceappMethods = {
 };
 PyMODINIT_FUNC
 {
-	PyModule_Create(&serviceappMethods);
+	PyModule_Create(&moduledef);
 
 	SSL_load_error_strings();
 	SSL_library_init();
