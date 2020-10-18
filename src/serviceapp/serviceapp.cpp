@@ -1646,6 +1646,7 @@ static struct PyModuleDef moduledef = {
 	NULL,													/* m_free */
 };
 PyMODINIT_FUNC
+initserviceapp(void)
 {
 	PyModule_Create(&moduledef);
 
