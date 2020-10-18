@@ -15,7 +15,7 @@
 #endif
 #include <lib/gui/esubtitle.h>
 #include <lib/dvb/idvb.h>
-
+#include <Python.h>
 #include "serviceapp.h"
 #include "gstplayer.h"
 #include "exteplayer3.h"
