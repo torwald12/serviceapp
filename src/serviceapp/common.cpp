@@ -243,7 +243,7 @@ int convertToUTF8(const std::string &input_string, const std::string &input_enco
         return 1;
     }
     Py_DECREF(py_unicode);
-    output_string = PyString_AsString(py_string);
+    output_string = PyBytes_AsString(py_string);
     Py_DECREF(py_string);
     return 0;
 }
