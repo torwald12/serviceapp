@@ -199,7 +199,7 @@ public:
 	};
 
 	// iServiceHandler
-	RESULT play(const eServiceReference &ref, ePtr<iPlayableService> &ptr){ptr = new eServiceApp(); return 0;};
+	RESULT play(const eServiceReference &ref, ePtr<iPlayableService> &ptr){ptr = new eServiceApp; return 0;};
 	RESULT record(const eServiceReference &, ePtr<iRecordableService> &ptr){ptr=0;return -1;};
 	RESULT list(const eServiceReference &, ePtr<iListableService> &ptr){ptr=0;return -1;};
 	RESULT info(const eServiceReference &, ePtr<iStaticServiceInformation> &ptr){ptr=m_service_info; return 0;};
