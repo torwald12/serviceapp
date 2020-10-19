@@ -221,13 +221,13 @@ int detectEncoding(const std::string &content, std::string &encoding)
 int convertToUTF8(const std::string &input_string, const std::string &input_encoding, std::string &output_string)
 {
     PyObject *py_string, *py_unicode;
-    py_string = PyString_FromStringAndSize(input_string.c_str(), input_string.length());
+    py_string = PyBytes_FromStringAndSize(input_string.c_str(), input_string.length());
     if (py_string == NULL)
     {
         PyErr_Print();
         return 1;
     }
-    py_unicode = PyString_AsDecodedObject(py_string, input_encoding.c_str(), "strict");
+    py_unicode = PyUnicode_AsDecodedObject(py_string, input_encoding.c_str(), "strict");
     if (py_unicode == NULL)
     {
         Py_DECREF(py_string);
