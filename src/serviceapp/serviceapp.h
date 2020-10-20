@@ -8,7 +8,6 @@
 #include <lib/base/thread.h>
 #include <lib/dvb/subtitle.h>
 
-#include "Python.h"
 #include "common.h"
 #include "extplayer.h"
 #include "m3u8.h"
