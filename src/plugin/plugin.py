@@ -19,7 +19,7 @@ from enigma import eEnv, eServiceReference
 
 from . import _
 #import Plugins.SystemPlugins.ServiceApp.serviceapp_client
-from .serviceapp_client import *
+from . serviceapp_client import *
 
 
 SINKS_DEFAULT = ("", "")
