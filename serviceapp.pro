@@ -9,7 +9,7 @@ CONFIG += plugin no_plugin_name_prefix
 
 __i686__ {
 CONFIG += link_pkgconfig
-PKGCONFIG += python enigma2 uchardet openssl
+PKGCONFIG += ${PYTHON_PN} enigma2 uchardet openssl
 
 QMAKE_CXXFLAGS = -include Python.h
 DEFINES += OPENPLI_ISERVICE_VERSION=1 DEBUG=1
@@ -44,7 +44,7 @@ QMAKE_LINK              = $${QMAKE_CXX}
 QMAKE_LFLAGS            = --sysroot=$$SYSROOT -D PLATFORM_MIPSEL -mel -mabi=32 -march=mips32
 
 INCLUDEPATH += \
-    $$SYSROOT/usr/include/python2.7 \
+    $$SYSROOT/usr/include/python3.8 \
     $$SYSROOT/usr/include/enigma2 \
     $$SYSROOT/usr/include/sigc++-2.0 \
     $$SYSROOT/usr/lib/sigc++-2.0/include
@@ -52,8 +52,8 @@ INCLUDEPATH += \
 LIBS += -luchardet -lssl -lcrypto
 
 target.path = /usr/lib/enigma2/python/Plugins/SystemPlugins/ServiceApp
-python.path = /usr/lib/enigma2/python/Plugins/SystemPlugins/ServiceApp
-python.files = \
+${PYTHON_PN}.path = /usr/lib/enigma2/python/Plugins/SystemPlugins/ServiceApp
+${PYTHON_PN}.files = \
     $$PWD/src/plugin/__init__.py \
     $$PWD/src/plugin/plugin.py \
     $$PWD/src/plugin/serviceapp_client.py \
